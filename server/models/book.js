@@ -33,6 +33,7 @@ const bookSchema = mongoose.Schema({
     }
 },{timestamps:true})
 
+//everytime we create a a new book this bookSchema will be used 
 const Book = mongoose.model('Book',bookSchema )
 
 module.exports = { Book }

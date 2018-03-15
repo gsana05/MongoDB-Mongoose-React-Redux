@@ -109,6 +109,7 @@ userSchema.methods.deleteToken = function(token,cb){
     })
 }
 
+//everytime we create a user this userSchema will be used 
 const User = mongoose.model('User', userSchema)
 
 module.exports = { User }

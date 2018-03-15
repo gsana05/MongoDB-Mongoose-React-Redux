@@ -2,12 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const config = require('./config/config').get(process.env.NODE.ENV);
+const config = require('./config/config').get(process.env.NODE.ENV); //for production 
 const app = express();
 
 //es6 promises
-mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE)
+// promises are objects that represents and action that has not finished yet but will do at some point 
+mongoose.Promise = global.Promise; // opens up mongoose to use the promise librar methods 
+mongoose.connect(config.DATABASE) //connects mongoose to mongoDB 
 
 //gives access to use mongoose models and schema 
 const { User } = require('./models/user');
@@ -111,6 +112,7 @@ app.get('/api/user_posts', (req, res) => {
 app.post('/api/book', ( req, res ) => {
     const book = new Book(req.body) //this gives you access to body schema put into "book" const 
 
+    //save is a mongoose method 
     book.save((err,doc) =>{ //book is connected with mongoose so allows me to pull data out e.g doc._id 
         if(err) return res.status(400).send(err); // if there is an error do this 
         res.status(200).json({ // if book is saving do this 
