@@ -1,5 +1,6 @@
 //this middleare is for api/logout and '/api/auth'
 // checks if users login and logout 
+//auth gets the unique token so server knows who the exact user is 
 const { User } = require('./../models/user');
 
 let auth = (req, res , next) => {

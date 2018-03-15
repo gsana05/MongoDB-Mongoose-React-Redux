@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE.ENV); //for production 
-const app = express();
+const app = express(); //express routing gives you access to (req,res, next)
 
 //es6 promises
 // promises are objects that represents and action that has not finished yet but will do at some point 
