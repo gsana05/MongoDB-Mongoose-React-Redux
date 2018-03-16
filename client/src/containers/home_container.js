@@ -14,7 +14,7 @@ class HomeContainer extends Component {
         //getBooks(limit, start, order) from actions url parameters  
         //DISPATCH accepts an ACTION and dispatches the data to the store which gives it full access to the app 
         // which makes data available from getBooks function to use and display on the UI 
-        this.props.dispatch(getBooks(6, 0, 'asc'))
+        this.props.dispatch(getBooks(1, 0, 'desc'))
     }
     
     //map/loops through the items and finds unique id (book) requested by user on the UI 
@@ -26,11 +26,22 @@ class HomeContainer extends Component {
        : null
     )
 
+    loadmore = () => {
+        // adds 1 book more from the databse each time onClick 
+        // counts how many books on the list
+        let count = this.props.books.list.length;
+        // this then passes the list as a argument to ACTION which is waiting for the list 
+        this.props.dispatch(getBooks(1,count,'desc',this.props.books.list))
+    }
+
     render(){
         //console.log(this.props)
         return (
             <div>
                 {this.renderItems(this.props.books)} 
+                <div className="loadmore"
+                onClick={this.loadmore}
+                >Load More </div> 
             </div>
         )
     }

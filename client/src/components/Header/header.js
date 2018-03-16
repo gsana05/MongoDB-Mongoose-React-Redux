@@ -6,9 +6,11 @@ import Nav from './Sidenav/sidenav';
 class Header extends Component {
 
     state = {
+        //tells sidenav to be hidden // defualt state 
         showNav:false
     }
-
+    
+    // toggles state of sidenav = show and hide 
     onHideNav = () => {
         this.setState({showNav:false})
     }
