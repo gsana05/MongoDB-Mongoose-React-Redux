@@ -12,6 +12,7 @@ import Routes from './routes';
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware,ReduxThunk)(createStore)
 
 ReactDOM.render(
+    //store = takes in all the data //everything within Provider tags has access to the data 
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <Routes/>
