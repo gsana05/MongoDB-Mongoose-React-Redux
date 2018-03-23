@@ -50,6 +50,7 @@ class HomeContainer extends Component {
 
 //mapStateToProps - takes a piece of state specified in return and sends into component as props 
 //  this allows access to books in the entire application 
+// REDUCER 
 function mapStateToProps(state){
     return {
         books:state.books

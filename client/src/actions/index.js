@@ -14,11 +14,13 @@ export function getBooks(
                     .then(response => {
                         if(list){
                             // returns the previous loaded book list (list) plus one new book to the list (response.data)
+                            // DATA - represents data from MONGOOSE/MONGODB
                             return[...list,...response.data]
                         } else {
                             // returns nothing other than the books already loaded, as there are no more to load 
                             // if on the books are already on UI 
-                            return response.data 
+                            // DATA - represents data from MONGOOSE/MONGODB
+                            return response.data
                         }
                     }
                 )
@@ -26,5 +28,40 @@ export function getBooks(
     return {
         type:'GET_BOOKS',
         payload:request
+    }
+}
+
+export function getBookWithReviewer(id) {
+    const request = axios.get(`/api/getBook?id=${id}`)
+
+//using redux-thunk
+    return (dispatch) => {
+        request.then(({data}) => {
+            let book = data;
+            //console.log(book)
+
+            axios.get(`/api/getReviewer?id=${book.ownerId}`)
+            .then(({data}) => {
+                let response = {
+                    book,
+                    reviewer: data
+                }
+                //console.log(response)
+                dispatch({
+                    type: 'GET_BOOK_W_REVIEWER',
+                    payload: response
+                })
+            })
+        })
+    }
+}
+
+export function clearBookWithReviewer(){
+    return {
+        type:'CLEAR_BOOK_W_REVIEWER',
+        payload:{
+            book:{},
+            reviewer:{}
+        }
     }
 }
